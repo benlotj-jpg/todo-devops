@@ -17,6 +17,9 @@ export default function Home() {
     setInput("");
   };
 
+  const toggleTask = (id: number) =>
+    setTasks(tasks.map((t) => (t.id === id ? { ...t, done: !t.done } : t)));
+
   return (
     <main style={{ maxWidth: 500, margin: "40px auto", fontFamily: "sans-serif" }}>
       <h1>TODO APPLICATION</h1>
@@ -29,7 +32,14 @@ export default function Home() {
       <ul style={{ listStyle: "none", padding: 0 }}>
         {tasks.map((t) => (
           <li key={t.id}>
-            <input type="checkbox" checked={t.done} readOnly /> {t.text}{" "}
+            <input
+              type="checkbox"
+              checked={t.done}
+              onChange={() => toggleTask(t.id)}
+            />{" "}
+            <span style={{ textDecoration: t.done ? "line-through" : "none" }}>
+              {t.text}
+            </span>{" "}
             <button>Delete</button>
           </li>
         ))}
