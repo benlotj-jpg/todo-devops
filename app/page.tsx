@@ -11,6 +11,12 @@ export default function Home() {
   ]);
   const [input, setInput] = useState("");
 
+  const addTask = () => {
+    if (!input.trim()) return;
+    setTasks([...tasks, { id: Date.now(), text: input.trim(), done: false }]);
+    setInput("");
+  };
+
   return (
     <main style={{ maxWidth: 500, margin: "40px auto", fontFamily: "sans-serif" }}>
       <h1>TODO APPLICATION</h1>
@@ -19,7 +25,7 @@ export default function Home() {
         onChange={(e) => setInput(e.target.value)}
         placeholder="Enter a task..."
       />
-      <button>Add Task</button>
+      <button onClick={addTask}>Add Task</button>
       <ul style={{ listStyle: "none", padding: 0 }}>
         {tasks.map((t) => (
           <li key={t.id}>
