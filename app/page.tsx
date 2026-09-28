@@ -20,6 +20,9 @@ export default function Home() {
   const toggleTask = (id: number) =>
     setTasks(tasks.map((t) => (t.id === id ? { ...t, done: !t.done } : t)));
 
+  const deleteTask = (id: number) =>
+    setTasks(tasks.filter((t) => t.id !== id));
+
   return (
     <main style={{ maxWidth: 500, margin: "40px auto", fontFamily: "sans-serif" }}>
       <h1>TODO APPLICATION</h1>
@@ -40,7 +43,7 @@ export default function Home() {
             <span style={{ textDecoration: t.done ? "line-through" : "none" }}>
               {t.text}
             </span>{" "}
-            <button>Delete</button>
+            <button onClick={() => deleteTask(t.id)}>Delete</button>
           </li>
         ))}
       </ul>
